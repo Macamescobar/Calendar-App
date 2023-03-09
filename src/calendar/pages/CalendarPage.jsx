@@ -3,7 +3,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 import { addHours } from "date-fns";
 
-import { NavBar, CalendarEvent } from "../";
+import { NavBar, CalendarEvent, CalendarModal } from "../";
 import { localizer, messages } from "../../helpers";
 import { useState } from "react";
 
@@ -18,7 +18,8 @@ const events = [{
   user: {
     _id: '123',
     name: 'Macarena'
-  }
+  },
+  
 }]
 
 export const CalendarPage = () => {
@@ -32,7 +33,8 @@ export const CalendarPage = () => {
       background: '#835af1',
       borderRadius: 4,
       opacity: 0.8,
-      color: 'white'
+      color: 'white',
+      width: "50%",
     }
 
     return {
@@ -73,6 +75,8 @@ export const CalendarPage = () => {
         onSelectEvent = { onSelect }
         onView = { onViewChanged }
       />
+
+      <CalendarModal/>
     </>
   );
 };
