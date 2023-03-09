@@ -34,7 +34,6 @@ export const CalendarPage = () => {
       borderRadius: 4,
       opacity: 0.8,
       color: 'white',
-      width: "50%",
     }
 
     return {

@@ -38,3 +38,11 @@
   outline: none;
   padding: 10px;
 }
+
+.container {
+  display: block !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  margin-left: 0 !important;
+  align-items: none !important;
+}
