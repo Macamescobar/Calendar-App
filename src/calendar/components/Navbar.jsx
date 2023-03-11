@@ -3,7 +3,7 @@ export const NavBar = () => {
   return (
     <div
       className="navbar navbar-dark bg-dark px-4"
-      style={{ width: "100vw", marginTop: "-3rem"}}
+      style={{ width: "100vw"}}
     >
       <span className="navbar-brand">
         <i className="fas fa-calendar-alt"></i>

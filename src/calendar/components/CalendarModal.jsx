@@ -1,8 +1,10 @@
-import { addHours } from "date-fns";
-import { useState } from "react";
+import { addHours, differenceInSeconds } from "date-fns";
+import { useMemo, useState } from "react";
 import Modal from "react-modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Swal from "sweetalert2";
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 const customStyles = {
   content: {
@@ -18,7 +20,9 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 export const CalendarModal = () => {
+
   const [isOpen, setIsOpen] = useState(true);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const [formValues, setformValues] = useState({
     title: "Macarena",
@@ -26,6 +30,14 @@ export const CalendarModal = () => {
     start: new Date(),
     end: addHours(new Date(), 2),
   });
+
+  const titleClass = useMemo(() => {
+    if( !formSubmitted ) return '';
+
+    return( formValues.title.length > 0 )
+      ? ''
+      : 'is-invalid';
+  },[formValues.title, formSubmitted])
 
   const onInputChanged = ({ target }) => {
     setformValues({
@@ -46,6 +58,21 @@ export const CalendarModal = () => {
     setIsOpen(false);
   };
 
+  const onSubmit = ( event ) => {
+    event.preventDefault();
+    setFormSubmitted(true);
+    const difference = differenceInSeconds( formValues.end, formValues.start );
+
+    if ( isNaN(difference) || difference <= 0 ) {
+      Swal.fire( 'Fechas incorrectas', 'Revisar las fechas ingresadas', 'error');
+      return;
+    }
+
+    if ( formValues.title.length <= 0) return;
+    console.log(formValues);
+    
+  }
+
   return (
     <Modal
       isOpen={isOpen}
@@ -57,7 +84,7 @@ export const CalendarModal = () => {
     >
       <h1> New Event </h1>
       <hr />
-      <form className="container">
+      <form className="container" onSubmit={onSubmit }>
         <div className="form-group mb-2">
           <label> Date and start time</label>
           <DatePicker
@@ -65,27 +92,29 @@ export const CalendarModal = () => {
             onChange={(event) => onDateChanged(event, "start")}
             className="form-control"
             dateFormat="Pp"
+            showTimeSelect
+            timeCaption="Time"
           />
         </div>
 
         <div className="form-group mb-2">
           <label> Date and end time </label>
-          <input className="form-control" placeholder="Fecha inicio" />
           <DatePicker
             minDate={ formValues.start }
             selected={formValues.end}
             onChange={(event) => onDateChanged(event, "end")}
             className="form-control"
             dateFormat="Pp"
+            showTimeSelect
+            timeCaption="Time"
           />
         </div>
-
         <hr />
         <div className="form-group mb-2">
           <label>Titulo y notas</label>
           <input
             type="text"
-            className="form-control"
+            className= {`form-control${ titleClass }`}
             placeholder="Título del evento"
             name="title"
             autoComplete="off"
