@@ -1,9 +1,7 @@
 import { Calendar } from "react-big-calendar";
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
-import { addHours } from "date-fns";
-
-import { NavBar, CalendarEvent, CalendarModal } from "../";
+import { NavBar, CalendarEvent, CalendarModal, FabAddNew, FabDelete } from "../";
 import { localizer, messages } from "../../helpers";
 import { useState } from "react";
 import { useUiStore, useCalendarStore } from "../../hooks";
@@ -25,6 +23,7 @@ export const CalendarPage = () => {
       borderRadius: 4,
       opacity: 0.8,
       color: 'white',
+      height: "4rem",
     }
 
     return {
@@ -56,7 +55,7 @@ export const CalendarPage = () => {
         defaultView={ lastView }
         startAccessor="start"
         endAccessor="end"
-        style={{ height: "80vh", marginTop: "3rem" }}
+        style={{ height: "80vh", marginTop: "3rem"}}
         messages={ messages()}
         eventPropGetter={ eventStyleGetter }
         components={{
@@ -68,6 +67,8 @@ export const CalendarPage = () => {
       />
 
       <CalendarModal/>
+      <FabAddNew/>
+      <FabDelete />
     </>
   );
 };

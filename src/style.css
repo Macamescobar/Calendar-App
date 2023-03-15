@@ -11,6 +11,7 @@
   z-index: 999;
 }
 
+
 .modal-fondo {
   background-color: rgba(0, 0, 0, 0.3);
   bottom: 0;
@@ -45,4 +46,25 @@
   width: 100% !important;
   margin-left: 0 !important;
   align-items: none !important;
+}
+
+/* FABS */
+
+.fab {
+  border-radius: 100%;
+  bottom: 25px;
+  font-size: 20px;
+  padding: 25px;
+  position: fixed;
+  right: 25px;
+}
+
+.fab-danger {
+  border-radius: 100%;
+  bottom: 25px;
+  font-size: 20px;
+  position: fixed;
+  left: 25px;
+  width: 70px;
+  height: 70px;
 }
