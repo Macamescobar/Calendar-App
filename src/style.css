@@ -40,7 +40,7 @@
   padding: 10px;
 }
 
-.container {
+.container-modal {
   display: block !important;
   flex-direction: column !important;
   width: 100% !important;

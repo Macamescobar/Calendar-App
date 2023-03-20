@@ -1,10 +1,11 @@
 .container {
-  width: 100vw;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-left: 4rem;
+  width: 100vw !important;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin-left: 4rem !important;
+  margin-top: 8rem;
 }
 
 .login-form-1 {
