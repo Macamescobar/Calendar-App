@@ -4,7 +4,8 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { NavBar, CalendarEvent, CalendarModal, FabAddNew, FabDelete } from "../";
 import { localizer, messages } from "../../helpers";
 import { useState } from "react";
-import { useUiStore, useCalendarStore } from "../../hooks";
+import { useUiStore, useCalendarStore, useAuthStore } from "../../hooks";
+import { useEffect } from "react";
 
 
 
@@ -12,14 +13,15 @@ export const CalendarPage = () => {
 
   const { openDateModal } = useUiStore();
   const { events, setActiveEvent, startLoadingEvents } = useCalendarStore();
-
+  const { user } = useAuthStore();
   const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'week')
 
   const eventStyleGetter = (event, start, end, isSelected) => {
-    //console.log({event, start, end, isSelected});
-
+    
+    
+    const isMyEvent = (user.uid === event.user._id ) || (user.uid === event.user.uid )
     const style = {
-      background: '#835af1',
+      backgroundColor: isMyEvent ? '#835af1' : '#465660',
       borderRadius: 4,
       opacity: 0.8,
       color: 'white',
@@ -44,6 +46,11 @@ export const CalendarPage = () => {
     localStorage.setItem('lastView', event);
     setLastView( event );
   }
+
+  useEffect(() => {
+    startLoadingEvents();
+  }, [])
+  
 
   return (
     <>
