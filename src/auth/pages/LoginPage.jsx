@@ -113,7 +113,7 @@ export const LoginPage = () => {
             <input
               type="password"
               className="form-control"
-              placeholder="Repita la contraseña"
+              placeholder="Repeat password"
               name="registerPassword2"
               value={ registerPassword2}
               onChange={ onRegisterInputChange }
@@ -124,7 +124,7 @@ export const LoginPage = () => {
             <input 
               type="submit" 
               className="btnSubmit" 
-              value="Crear cuenta" 
+              value="Create Account" 
             />
           </div>
         </form>
